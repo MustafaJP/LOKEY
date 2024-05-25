@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lokey/home_page.dart';
+import 'package:lokey/input_page.dart';
 import 'package:lokey/output_page.dart';
 import 'package:lokey/recommendation_page.dart.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
+        '/input': (context) => const InputPage(),
         '/output': (context) => const OutputPage(),
         '/recommendation': (context) => const RecommendationPage(),
       },

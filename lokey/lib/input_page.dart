@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lokey/widget/banner_widget.dart';
-import 'package:lokey/widget/half_wheel.dart';
+import 'package:lokey/widget/user_form.dart';
 
-class OutputPage extends StatelessWidget {
-  const OutputPage({super.key});
+class InputPage extends StatelessWidget {
+  const InputPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class OutputPage extends StatelessWidget {
               padding: const EdgeInsets.all(10),
             ),
             const Text(
-              'Result',
+              'Input',
               style: TextStyle(
                   color: Colors.white70,
                   fontWeight: FontWeight.bold,
@@ -32,44 +31,27 @@ class OutputPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 100),
-                  child: SizedBox(
-                    width: 200,
-                    height: 100,
-                    child: CustomPaint(
-                      painter: HalfCirclePainter(),
-                    ),
-                  ),
-                ),
-                const Text(
-                  'You have\n\$5,500',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                  textAlign: TextAlign.center,
-                ),
-                const Padding(padding: EdgeInsets.all(30))
-              ],
+            const Padding(padding: EdgeInsets.all(10)),
+            const Text(
+              'Emergency Fund Predictor',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            BannerWidget(),
-            const SizedBox(
-              height: 20,
-            ),
+            UserForm(),
             ElevatedButton(
               child: const Text(
-                'Resubmit again',
+                'Go to output page',
                 style: TextStyle(
                   color: Colors.blue,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: 12,
                 ),
               ),
               onPressed: () {
                 // Navigate to the About Page
-                Navigator.pushNamed(context, '/input');
+                Navigator.pushNamed(context, '/output');
               },
             )
           ],

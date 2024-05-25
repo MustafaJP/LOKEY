@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lokey/widget/user_form.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,46 +6,50 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('lib/image/lokey_image.jpg', width: 30, height: 30),
-            Container(
-              padding: const EdgeInsets.all(10),
-            ),
-            const Text(
-              'Lokey',
-              style: TextStyle(
-                  color: Colors.white70,
+      backgroundColor: Colors.blue,
+      body: Container(
+        color: Colors.blue,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 40),
+              const Text(
+                "Welcome to",
+                style: TextStyle(
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 28),
-            ),
-          ],
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(padding: EdgeInsets.all(10)),
-            const Text(
-              'Emergency Fund Predictor',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            UserForm(),
-            ElevatedButton(
-              child: const Text('Go to output page'),
-              onPressed: () {
-                // Navigate to the About Page
-                Navigator.pushNamed(context, '/output');
-              },
-            )
-          ],
+                  fontSize: 36,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Image.asset('lib/image/lokey_image.jpg', width: 100, height: 100),
+              const SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: () {
+                  // Navigate to the Input Page
+                  Navigator.pushNamed(context, '/input');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: const Text(
+                  'Get Started',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

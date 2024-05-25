@@ -128,10 +128,18 @@ class _UserFormState extends State<UserForm> {
                   if (_formKey.currentState!.validate()) {
                     const SnackBar(content: Text('Processing Data'));
                     //submit it to API
+                    //push to next page
                     Navigator.pushNamed(context, '/output');
                   }
                 },
-                child: const Text('Submit'),
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ],
           ),
