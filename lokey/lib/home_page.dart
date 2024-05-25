@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lokey/widget/user_form.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,21 +9,36 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
-        title: const Text(
-          'Lokey Emergency Fund Predictor',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('lib/image/lokey_image.jpg', width: 30, height: 30),
+            Container(
+              padding: const EdgeInsets.all(10),
+            ),
+            const Text(
+              'Lokey',
+              style: TextStyle(
+                  color: Colors.white70,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28),
+            ),
+          ],
         ),
         centerTitle: true,
         backgroundColor: Colors.blue,
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Padding(padding: EdgeInsets.all(10)),
             const Text(
-              'Input Page',
-              style: TextStyle(fontSize: 24),
+              'Emergency Fund Predictor',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            UserForm(),
             ElevatedButton(
               child: const Text('Go to output page'),
               onPressed: () {
