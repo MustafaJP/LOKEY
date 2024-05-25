@@ -10,7 +10,7 @@ class OutputPage extends StatelessWidget {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
-          'Lokey Emergency Fund Predictor',
+          'Result',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -20,16 +20,17 @@ class OutputPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Output Page',
-              style: TextStyle(fontSize: 24),
-            ),
             Container(
               width: 200,
               height: 100,
               child: CustomPaint(
                 painter: HalfCirclePainter(),
               ),
+            ),
+            const Text(
+              'You have\n\$5,500',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              textAlign: TextAlign.center,
             )
           ],
         ),
