@@ -1,51 +1,106 @@
 /* App.css */
-body {
+.App {
+  text-align: center;
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
 }
 
-.center-form {
-  background-color: #fff;
+.App-header {
+  background-color: #007bff;
+  padding: 20px;
+  color: white;
+}
+
+.App-logo {
+  height: 80px;
+}
+
+.form-container {
+  background: white;
   padding: 20px;
   border-radius: 8px;
+  max-width: 400px;
+  margin: 20px auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
 }
 
-.center-form form {
-  display: flex;
-  flex-direction: column;
-}
-
-.center-form label {
-  margin-bottom: 10px;
-}
-
-.center-form input[type="text"],
-.center-form input[type="number"] {
-  width: 100%;
-  /* padding: 8px; */
-  margin-top: 5px;
+.form-group {
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  text-align: left;
 }
 
-.center-form input[type="submit"] {
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="number"],
+.form-group input[type="text"],
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group input[type="submit"] {
   background-color: #007bff;
   color: white;
+  padding: 10px 20px;
   border: none;
-  padding: 10px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-.center-form input[type="submit"]:hover {
+.form-group input[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+.result-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.fund-zone {
+  margin-bottom: 20px;
+}
+
+.fund-zone p {
+  margin: 0;
+}
+
+.fund-amount {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.fund-meter {
+  position: relative;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+  display: flex;
+}
+
+.fund-meter .zone {
+  height: 100%;
+}
+
+.indicator {
+  position: absolute;
+  height: 30px;
+  width: 2px;
+  background: #000;
+  top: -5px;
+  border-radius: 2px;
 }
