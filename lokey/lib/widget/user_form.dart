@@ -25,18 +25,18 @@ class _UserFormState extends State<UserForm> {
   ];
 
   List<String> months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
   ];
 
   @override
@@ -69,7 +69,7 @@ class _UserFormState extends State<UserForm> {
                   });
                 },
                 decoration: const InputDecoration(
-                  labelText: 'Select number of months (1-12):',
+                  labelText: 'Select number of monthly expenses (1-12):',
                 ),
                 items: months.map((String month) {
                   return DropdownMenuItem<String>(
