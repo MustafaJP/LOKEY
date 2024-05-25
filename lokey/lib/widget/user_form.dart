@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 
 class UserForm extends StatefulWidget {
   @override
@@ -25,71 +25,20 @@ class _UserFormState extends State<UserForm> {
     'Real estate'
   ];
 
-  List<String> months = List.generate(12, (index) => (index + 1).toString());
-
-  List<Widget> _buildMonthlyExpensesFields(int count) {
-    List<Widget> fields = [];
-    for (int i = 0; i < count; i++) {
-      fields.add(
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: 'Enter your monthly expenses for month ${i + 1}:',
-          ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
-          },
-        ),
-      );
-      fields.add(const SizedBox(height: 20));
-    }
-    return fields;
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // Get form data
-      int annualIncome = int.parse(_annualIncomeController.text);
-      int totalExpenses = 0;
-      for (TextEditingController controller in _monthlyExpensesControllers) {
-        totalExpenses += int.parse(controller.text);
-      }
-      int emergencyFund = int.parse(_emergencyFundController.text);
-      String jobType = selectedJobType!;
-      int dependencies = int.parse(_dependenciesController.text);
-
-      // Submit data to API
-      // Example API call
-      print('Submitting data to API:');
-      print('Annual Income: $annualIncome');
-      print('Total Expenses: $totalExpenses');
-      print('Emergency Fund: $emergencyFund');
-      print('Job Type: $jobType');
-      print('Dependencies: $dependencies');
-
-      // Push to next page
-      Navigator.pushNamed(context, '/output');
-    }
-  }
-
-  final TextEditingController _annualIncomeController = TextEditingController();
-  List<TextEditingController> _monthlyExpensesControllers = [];
-  final TextEditingController _emergencyFundController =
-      TextEditingController();
-  final TextEditingController _dependenciesController = TextEditingController();
-
-  @override
-  void dispose() {
-    _annualIncomeController.dispose();
-    _emergencyFundController.dispose();
-    _dependenciesController.dispose();
-    for (TextEditingController controller in _monthlyExpensesControllers) {
-      controller.dispose();
-    }
-    super.dispose();
-  }
+  List<String> months = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -132,15 +81,6 @@ class _UserFormState extends State<UserForm> {
                 validator: (value) => value == null ? 'Field required' : null,
               ),
               const SizedBox(height: 20),
-              Visibility(
-                visible: selectedMonth != null,
-                child: Column(
-                  children: [
-                    ..._buildMonthlyExpensesFields(
-                        int.parse(selectedMonth ?? '0')),
-                  ],
-                ),
-              ),
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Enter your current emergency fund:',
@@ -186,8 +126,12 @@ class _UserFormState extends State<UserForm> {
               const SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () {
-                  _submitForm();
-                  Navigator.pushNamed(context, '/output');
+                  if (_formKey.currentState!.validate()) {
+                    const SnackBar(content: Text('Processing Data'));
+                    //submit it to API
+                    //push to next page
+                    Navigator.pushNamed(context, '/output');
+                  }
                 },
                 child: const Text(
                   'Submit',
