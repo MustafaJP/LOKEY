@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lokey/widget/banner_widget.dart';
 import 'package:lokey/widget/half_wheel.dart';
 
-class OutputPage extends StatelessWidget {
+class OutputPage extends StatefulWidget {
   const OutputPage({super.key});
+
+  @override
+  State<OutputPage> createState() => _OutputPageState();
+}
+
+class _OutputPageState extends State<OutputPage> {
+  bool showRecommend = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +45,7 @@ class OutputPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 100),
+                  padding: const EdgeInsets.only(top: 200),
                   child: SizedBox(
                     width: 200,
                     height: 100,
@@ -54,7 +62,28 @@ class OutputPage extends StatelessWidget {
                 const Padding(padding: EdgeInsets.all(30))
               ],
             ),
-            BannerWidget(),
+            const SizedBox(
+              height: 20,
+            ),
+            Visibility(
+              visible: !showRecommend,
+              child: ElevatedButton(
+                child: const Text(
+                  'Show financial path',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    showRecommend = true;
+                  });
+                },
+              ),
+            ),
+            showRecommend ? BannerWidget() : Container(),
             const SizedBox(
               height: 20,
             ),
@@ -68,10 +97,13 @@ class OutputPage extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                // Navigate to the About Page
+                // Navigate to the input Page
                 Navigator.pushNamed(context, '/input');
               },
-            )
+            ),
+            const SizedBox(
+              height: 40,
+            ),
           ],
         ),
       ),
