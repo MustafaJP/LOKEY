@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lokey/widget/banner_widget.dart';
 import 'package:lokey/widget/half_wheel.dart';
 
 class OutputPage extends StatelessWidget {
@@ -8,6 +10,7 @@ class OutputPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
           'Result',
@@ -16,22 +19,31 @@ class OutputPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.blue,
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 200,
-              height: 100,
-              child: CustomPaint(
-                painter: HalfCirclePainter(),
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 100),
+                  child: SizedBox(
+                    width: 200,
+                    height: 100,
+                    child: CustomPaint(
+                      painter: HalfCirclePainter(),
+                    ),
+                  ),
+                ),
+                const Text(
+                  'You have\n\$5,500',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  textAlign: TextAlign.center,
+                ),
+                const Padding(padding: EdgeInsets.all(50))
+              ],
             ),
-            const Text(
-              'You have\n\$5,500',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-              textAlign: TextAlign.center,
-            )
+            BannerWidget(),
           ],
         ),
       ),
