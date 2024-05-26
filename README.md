@@ -10,7 +10,7 @@ To run Lokey on your local machine, follow these steps:
 
 1. Ensure Flutter is installed on your system by running:
    flutter doctor
-2. Clone the Lukey repository:
+2. Clone the Lokey repository:
    git clone https://github.com/MustafaJP/LOKEY.git
    cd lokey
 3. Install dependencies:
@@ -20,7 +20,7 @@ To run Lokey on your local machine, follow these steps:
 
 ## Usage
 
-Watch this [YouTube video](https://youtube.com/shorts/s_aCjiS0J6Q?feature=share) for a demonstration of Lukey's usage.
+Watch this [YouTube video](https://youtube.com/shorts/s_aCjiS0J6Q?feature=share) for a demonstration of Lokey's usage.
 
 ## Features
 
