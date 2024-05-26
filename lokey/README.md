@@ -1,16 +1,36 @@
-# lokey
+# Lokey
 
-A new Flutter project.
+## Project Description
 
-## Getting Started
+Lokey is a mobile app designed to assist elderly individuals in tracking their finances and lifestyles, ultimately facilitating financially secure retirement through healthy emergency fund saving practices.
 
-This project is a starting point for a Flutter application.
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
+To run Lokey on your local machine, follow these steps:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Ensure Flutter is installed on your system by running:
+   flutter doctor
+2. Clone the Lukey repository:
+   git clone https://github.com/MustafaJP/LOKEY.git
+   cd lokey
+3. Install dependencies:
+   flutter pub get
+4. Choose a device to run the app on and execute the following command:
+   flutter run
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
+
+Watch this [YouTube video](https://youtube.com/shorts/s_aCjiS0J6Q?feature=share) for a demonstration of Lukey's usage.
+
+## Features
+
+- **Financial Tracking**: Allows users to track their financial activities and expenses.
+- **Emergency Savings Prediction**: Predicts the required emergency savings based on user input and financial data.
+- **Recommendations**: Provides recommendations for financial schemes offered by companies in Singapore.
+
+## Acknowledgements
+
+- Mustafa
+- Emily
+- Michael
+- Jun Yu
