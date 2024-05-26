@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lokey/widget/user_form.dart';
 
+/// A page for user input.
 class InputPage extends StatelessWidget {
   const InputPage({super.key});
 

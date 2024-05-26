@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:lokey/model/output_arguments.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:math';
 
+/// A form widget that allows users to input their financial information and submit it for analysis.
+/// This widget includes fields for annual income, monthly expenses, emergency fund, job type, and dependencies.
+/// Upon submission, the form data is sent to an API for analysis, and the response is displayed on the output screen.
+///
+///
 class UserForm extends StatefulWidget {
   @override
   State<UserForm> createState() => _UserFormState();
@@ -30,30 +34,6 @@ class _UserFormState extends State<UserForm> {
   ];
 
   List<String> months = List.generate(12, (index) => (index + 1).toString());
-
-  List<Widget> _buildMonthlyExpensesFields(int count) {
-    _monthlyExpensesControllers =
-        List.generate(count, (index) => TextEditingController());
-    List<Widget> fields = [];
-    for (int i = 0; i < count; i++) {
-      fields.add(
-        TextFormField(
-          controller: _monthlyExpensesControllers[i],
-          decoration: InputDecoration(
-            labelText: 'Enter your monthly expenses for month ${i + 1}:',
-          ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
-          },
-        ),
-      );
-      fields.add(const SizedBox(height: 20));
-    }
-    return fields;
-  }
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
@@ -134,6 +114,7 @@ class _UserFormState extends State<UserForm> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextFormField(
+                key: const Key('annualIncome'),
                 controller: _annualIncomeController,
                 decoration: const InputDecoration(
                   labelText: 'Enter your annual income:',
@@ -147,6 +128,7 @@ class _UserFormState extends State<UserForm> {
               ),
               const SizedBox(height: 20),
               DropdownButtonFormField<String>(
+                key: const Key('monthlyExpensesDropdown'),
                 value: selectedMonth, // Set the value of the dropdown
                 onChanged: (value) {
                   setState(() {
@@ -175,6 +157,7 @@ class _UserFormState extends State<UserForm> {
                 ),
               ),
               TextFormField(
+                key: const Key('emergencyFund'),
                 controller: _emergencyFundController,
                 decoration: const InputDecoration(
                   labelText: 'Enter your current emergency fund:',
@@ -188,6 +171,7 @@ class _UserFormState extends State<UserForm> {
               ),
               const SizedBox(height: 20),
               DropdownButtonFormField<String>(
+                key: const Key('jobTypeDropdown'),
                 value: selectedJobType, // Set the value of the dropdown
                 onChanged: (value) {
                   setState(() {
@@ -207,6 +191,7 @@ class _UserFormState extends State<UserForm> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                key: const Key('dependencies'),
                 controller: _dependenciesController,
                 decoration: const InputDecoration(
                   labelText: 'Enter your dependencies:',
@@ -237,5 +222,30 @@ class _UserFormState extends State<UserForm> {
         ),
       ),
     );
+  }
+
+  List<Widget> _buildMonthlyExpensesFields(int count) {
+    _monthlyExpensesControllers =
+        List.generate(count, (index) => TextEditingController());
+    List<Widget> fields = [];
+    for (int i = 0; i < count; i++) {
+      fields.add(
+        TextFormField(
+          key: Key('monthlyExpense$i'),
+          controller: _monthlyExpensesControllers[i],
+          decoration: InputDecoration(
+            labelText: 'Enter your monthly expenses for month ${i + 1}:',
+          ),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
+        ),
+      );
+      fields.add(const SizedBox(height: 20));
+    }
+    return fields;
   }
 }

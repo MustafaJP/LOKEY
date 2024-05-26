@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
+/// Custom painter for drawing a half circle with colored segments and text labels.
 class HalfCirclePainter extends CustomPainter {
   final int actualEmergencyFunds;
   final int predictedEmergencyFunds;
@@ -62,17 +63,6 @@ class HalfCirclePainter extends CustomPainter {
     final double textAngleGap =
         math.pi / (texts.length - 1); // Angle between each text
     final double textPadding = 50; // Padding between text and circle
-
-    double arrowAngle;
-    if (actualEmergencyFunds >= predictedEmergencyFunds * 1.3) {
-      arrowAngle = startAngle - textAngleGap * 1;
-    } else if (actualEmergencyFunds >= predictedEmergencyFunds) {
-      arrowAngle = startAngle - textAngleGap * 2;
-    } else if (actualEmergencyFunds >= predictedEmergencyFunds * 0.7) {
-      arrowAngle = startAngle - textAngleGap * 3;
-    } else {
-      arrowAngle = startAngle - textAngleGap * 4;
-    }
 
     for (int i = 0; i < texts.length; i++) {
       final double angle =

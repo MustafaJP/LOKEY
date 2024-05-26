@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// A widget that displays a list of banners.
 class BannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,17 +27,23 @@ class BannerWidget extends StatelessWidget {
   }
 }
 
+/// A widget that represents a single banner.
 class BannerBuild extends StatelessWidget {
   final Color color;
   final String title;
   final String imagePath;
 
-  const BannerBuild(
-      {Key? key,
-      required this.color,
-      required this.title,
-      required this.imagePath})
-      : super(key: key);
+  /// Constructs a [BannerBuild] widget.
+  ///
+  /// The [color] parameter specifies the background color of the banner.
+  /// The [title] parameter specifies the title text of the banner.
+  /// The [imagePath] parameter specifies the path to the banner image.
+  const BannerBuild({
+    Key? key,
+    required this.color,
+    required this.title,
+    required this.imagePath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +58,10 @@ class BannerBuild extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: const TextStyle(
-                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           const SizedBox(height: 8.0),
         ],

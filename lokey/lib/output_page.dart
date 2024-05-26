@@ -5,6 +5,7 @@ import 'package:lokey/widget/banner_widget.dart';
 import 'package:lokey/widget/half_wheel.dart';
 import 'dart:convert';
 
+/// The output page widget that displays the result of the calculation.
 class OutputPage extends StatefulWidget {
   final OutputArguments arguments;
 
@@ -23,13 +24,12 @@ class _OutputPageState extends State<OutputPage> {
     int actualEmergencyFunds = widget.arguments.emergencyFund;
 
     // Access API response
-    // Access API response
     Map<String, dynamic> jsonResponse =
         jsonDecode(widget.arguments.apiResponse);
     double predictedEmergencyFundsDouble =
         jsonResponse["Predicted Recommended Emergency Fund"];
 
-// Convert the double value to an integer
+    // Convert the double value to an integer
     int predictedEmergencyFunds = predictedEmergencyFundsDouble.round().toInt();
 
     return Scaffold(
@@ -87,6 +87,7 @@ class _OutputPageState extends State<OutputPage> {
             Visibility(
               visible: !showRecommend,
               child: ElevatedButton(
+                key: const Key('showRecommendationButton'),
                 child: const Text(
                   'Show financial path',
                   style: TextStyle(

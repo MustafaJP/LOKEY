@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
               Image.asset('lib/image/lokey_image.jpg', width: 100, height: 100),
               const SizedBox(height: 40),
               ElevatedButton(
+                key: const Key('navigateToFormButton'),
                 onPressed: () {
                   // Navigate to the Input Page
                   Navigator.pushNamed(context, '/input');
