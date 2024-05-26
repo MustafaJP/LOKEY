@@ -9,14 +9,15 @@ Lokey is a mobile app designed to assist elderly individuals in tracking their f
 To run Lokey on your local machine, follow these steps:
 
 1. Ensure Flutter is installed on your system by running:
-   flutter doctor
+   >flutter doctor
 2. Clone the Lokey repository:
-   git clone https://github.com/MustafaJP/LOKEY.git
-   cd lokey
+   >git clone https://github.com/MustafaJP/LOKEY.git
+   >
+   >cd lokey
 3. Install dependencies:
-   flutter pub get
+   >flutter pub get
 4. Choose a device to run the app on and execute the following command:
-   flutter run
+   >flutter run
 
 ## Usage
 
