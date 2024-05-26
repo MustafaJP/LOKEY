@@ -40,20 +40,6 @@ class InputPage extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             UserForm(),
-            ElevatedButton(
-              child: const Text(
-                'Go to output page',
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                ),
-              ),
-              onPressed: () {
-                // Navigate to the About Page
-                Navigator.pushNamed(context, '/output');
-              },
-            )
           ],
         ),
       ),

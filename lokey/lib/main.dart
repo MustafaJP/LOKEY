@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lokey/home_page.dart';
 import 'package:lokey/input_page.dart';
+import 'package:lokey/model/output_arguments.dart';
 import 'package:lokey/output_page.dart';
 import 'package:lokey/recommendation_page.dart.dart';
 
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         '/input': (context) => const InputPage(),
-        '/output': (context) => const OutputPage(),
+        '/output': (context) {
+          final OutputArguments? args =
+              ModalRoute.of(context)?.settings.arguments as OutputArguments?;
+          return OutputPage(arguments: args ?? OutputArguments(0, ''));
+        },
         '/recommendation': (context) => const RecommendationPage(),
       },
     );

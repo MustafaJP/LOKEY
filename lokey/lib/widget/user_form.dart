@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:lokey/model/output_arguments.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:math';
 
 class UserForm extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class _UserFormState extends State<UserForm> {
   final _formKey = GlobalKey<FormState>();
   String? selectedJobType;
   String? selectedMonth;
+  List<TextEditingController> _monthlyExpensesControllers = [];
 
   List<String> jobTypes = [
     'Arts',
@@ -29,10 +32,13 @@ class _UserFormState extends State<UserForm> {
   List<String> months = List.generate(12, (index) => (index + 1).toString());
 
   List<Widget> _buildMonthlyExpensesFields(int count) {
+    _monthlyExpensesControllers =
+        List.generate(count, (index) => TextEditingController());
     List<Widget> fields = [];
     for (int i = 0; i < count; i++) {
       fields.add(
         TextFormField(
+          controller: _monthlyExpensesControllers[i],
           decoration: InputDecoration(
             labelText: 'Enter your monthly expenses for month ${i + 1}:',
           ),
@@ -49,34 +55,59 @@ class _UserFormState extends State<UserForm> {
     return fields;
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       // Get form data
       int annualIncome = int.parse(_annualIncomeController.text);
       int totalExpenses = 0;
+      int numberOfMonths = int.parse(selectedMonth ?? '0');
       for (TextEditingController controller in _monthlyExpensesControllers) {
         totalExpenses += int.parse(controller.text);
       }
-      int emergencyFund = int.parse(_emergencyFundController.text);
+      int averageMonthlyExpenses = totalExpenses ~/ numberOfMonths;
+      int emergencyFund = int.parse(
+          _emergencyFundController.text); // Fetch user input for emergency fund
       String jobType = selectedJobType!;
       int dependencies = int.parse(_dependenciesController.text);
 
-      // Submit data to API
-      // Example API call
-      print('Submitting data to API:');
-      print('Annual Income: $annualIncome');
-      print('Total Expenses: $totalExpenses');
-      print('Emergency Fund: $emergencyFund');
-      print('Job Type: $jobType');
-      print('Dependencies: $dependencies');
+      // Prepare the API request body
+      Map<String, dynamic> requestBody = {
+        'Your Job': jobType,
+        'Your Income': annualIncome.toString(),
+        'Your monthly expenses': averageMonthlyExpenses.toString(),
+        'Number of your dependents': dependencies.toString(),
+        'How much do you wish to spend': emergencyFund.toString()
+      };
 
-      // Push to next page
-      Navigator.pushNamed(context, '/output');
+      // Make API call
+      String apiUrl =
+          'https://predict-emergency-okxwdijwqq-as.a.run.app/predict_emergency_fund';
+      try {
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(requestBody),
+        );
+
+        if (response.statusCode == 200) {
+          debugPrint('Response: ${response.body}');
+          // Navigate to the '/output' route and pass the response data
+          Navigator.pushNamed(
+            context,
+            '/output',
+            arguments: OutputArguments(emergencyFund,
+                response.body), // Pass user input as actualEmergencyFunds
+          );
+        } else {
+          debugPrint('Failed to submit data: ${response.statusCode}');
+        }
+      } catch (e) {
+        debugPrint('Error: $e');
+      }
     }
   }
 
   final TextEditingController _annualIncomeController = TextEditingController();
-  List<TextEditingController> _monthlyExpensesControllers = [];
   final TextEditingController _emergencyFundController =
       TextEditingController();
   final TextEditingController _dependenciesController = TextEditingController();
@@ -103,6 +134,7 @@ class _UserFormState extends State<UserForm> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextFormField(
+                controller: _annualIncomeController,
                 decoration: const InputDecoration(
                   labelText: 'Enter your annual income:',
                 ),
@@ -143,6 +175,7 @@ class _UserFormState extends State<UserForm> {
                 ),
               ),
               TextFormField(
+                controller: _emergencyFundController,
                 decoration: const InputDecoration(
                   labelText: 'Enter your current emergency fund:',
                 ),
@@ -174,6 +207,7 @@ class _UserFormState extends State<UserForm> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                controller: _dependenciesController,
                 decoration: const InputDecoration(
                   labelText: 'Enter your dependencies:',
                 ),
@@ -188,7 +222,6 @@ class _UserFormState extends State<UserForm> {
               ElevatedButton(
                 onPressed: () {
                   _submitForm();
-                  Navigator.pushNamed(context, '/output');
                 },
                 child: const Text(
                   'Submit',

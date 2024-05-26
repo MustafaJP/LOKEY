@@ -2,6 +2,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class HalfCirclePainter extends CustomPainter {
+  final int actualEmergencyFunds;
+  final int predictedEmergencyFunds;
+
+  HalfCirclePainter(this.actualEmergencyFunds, this.predictedEmergencyFunds);
+
   @override
   void paint(Canvas canvas, Size size) {
     final List<Color> colors = [
@@ -46,17 +51,28 @@ class HalfCirclePainter extends CustomPainter {
       );
     }
 
-    // Text positions
     final List<String> texts = [
-      'Too High\n\$26,000',
-      'Bit High\n\$19,000',
-      'Perfect\n\$16,000',
-      'Bit Low\n\$13,000',
-      'Too Little\n\$6,000'
+      'Too High\n\$${(predictedEmergencyFunds * 1.7).toStringAsFixed(0)}',
+      'Bit High\n\$${(predictedEmergencyFunds * 1.3).toStringAsFixed(0)}',
+      'Perfect\n\$$predictedEmergencyFunds',
+      'Bit Low\n\$${(predictedEmergencyFunds * 0.7).toStringAsFixed(0)}',
+      'Too Little\n\$${(predictedEmergencyFunds * 0.3).toStringAsFixed(0)}'
     ];
+
     final double textAngleGap =
         math.pi / (texts.length - 1); // Angle between each text
     final double textPadding = 50; // Padding between text and circle
+
+    double arrowAngle;
+    if (actualEmergencyFunds >= predictedEmergencyFunds * 1.3) {
+      arrowAngle = startAngle - textAngleGap * 1;
+    } else if (actualEmergencyFunds >= predictedEmergencyFunds) {
+      arrowAngle = startAngle - textAngleGap * 2;
+    } else if (actualEmergencyFunds >= predictedEmergencyFunds * 0.7) {
+      arrowAngle = startAngle - textAngleGap * 3;
+    } else {
+      arrowAngle = startAngle - textAngleGap * 4;
+    }
 
     for (int i = 0; i < texts.length; i++) {
       final double angle =
@@ -64,7 +80,7 @@ class HalfCirclePainter extends CustomPainter {
       final double x = centerX + (radius + textPadding) * math.cos(angle);
       final double y = centerY + (radius + textPadding) * math.sin(angle);
 
-      final textStyle = TextStyle(
+      const textStyle = TextStyle(
         color: Colors.black,
         fontSize: 16,
         fontWeight: FontWeight.bold,

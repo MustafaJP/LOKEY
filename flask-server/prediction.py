@@ -5,7 +5,8 @@ import joblib
 # Load the saved model
 loaded_model = joblib.load('random_forest_model.pkl')
 
-#From GES Survey 2023
+# From GES Survey 2023
+# Function is to convert job type to a job stability number ranging from 1-10
 def JobStabilityConverter(department):
     if department == "Arts":
         return 4
@@ -32,7 +33,8 @@ def JobStabilityConverter(department):
     else:
         return 5
 
-#function to predict emergency fund
+# function to predict emergency fund from trained synthetic model
+# function called by main function
 def predict_emergency_fund(user_input):
     try:
         # Convert 'Job Stability' to integer using JobStabilityConverter
@@ -68,29 +70,3 @@ def predict_emergency_fund(user_input):
     except Exception as e:
         return {'error': str(e)}, 400
 
-
-# user_input = {
-#     'Income ($)': int(input("Your Income: \n")),
-#     'Monthly Expenses ($)': int(input("Your monthly expenses: \n")),
-#     'Dependents': int(input('Number of your dependents: \n')),
-#     'Job Stability (1-10)': int(JobStabilityConverter(input('Your Job: '))),
-#     'Lifestyle Cost (1-10)': int(input("How much do you wish to spend: \n"))
-# }
-
-# # Converting
-# user_df = pd.DataFrame([user_input])
-
-# # Make a prediction
-# predicted_emergency_fund = loaded_model.predict(user_df)
-
-# # Prepare the result in a dictionary
-# result = {
-#     'Predicted Recommended Emergency Fund': float(predicted_emergency_fund[0])
-# }
-
-# # Convert the result to a JSON file
-# with open('predicted_emergency_fund.json', 'w') as json_file:
-#     json.dump(result, json_file)
-
-
-# print(f"Predicted Recommended Emergency Fund: ${predicted_emergency_fund[0]:,.2f}")

@@ -8,17 +8,17 @@ class BannerWidget extends StatelessWidget {
       children: [
         BannerBuild(
           color: Colors.blue,
-          title: 'Banner 1',
+          title: 'Singlife Savvy Invest II',
           imagePath: 'assets/banner1.jpg',
         ),
         BannerBuild(
           color: Colors.green,
-          title: 'Banner 2',
+          title: 'GREAT SupremeHealth Enhanced with GREAT TotalCare',
           imagePath: 'assets/banner2.jpg',
         ),
         BannerBuild(
           color: Colors.orange,
-          title: 'Banner 3',
+          title: 'PRUSelect Vantage Fund',
           imagePath: 'assets/banner3.jpg',
         ),
       ],
